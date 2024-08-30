@@ -29,7 +29,7 @@ const VideoCarousel = () => {
     gsap.to("#slider", {
       transform: `translateX(${-100 * videoId}%)`,
       duration: 2,
-      ease: "power2.inOut", // show visualizer https://gsap.com/docs/v3/Eases
+      ease: "power2.inOut",
     });
 
     // video animation to play the video when it is in the view
@@ -56,10 +56,9 @@ const VideoCarousel = () => {
       // animation to move the indicator
       let anim = gsap.to(span[videoId], {
         onUpdate: () => {
-          // get the progress of the video
           const progress = Math.ceil(anim.progress() * 100);
 
-          if (progress != currentProgress) {
+          if (progress !== currentProgress) {
             currentProgress = progress;
 
             // set the width of the progress bar
@@ -93,16 +92,18 @@ const VideoCarousel = () => {
         },
       });
 
-      if (videoId == 0) {
+      if (videoId === 0) {
         anim.restart();
       }
 
       // update the progress bar
       const animUpdate = () => {
-        anim.progress(
-          videoRef.current[videoId].currentTime /
-            hightlightsSlides[videoId].videoDuration
-        );
+        const videoElement = videoRef.current[videoId];
+        if (videoElement) {
+          anim.progress(
+            videoElement.currentTime / hightlightsSlides[videoId].videoDuration
+          );
+        }
       };
 
       if (isPlaying) {
@@ -118,14 +119,14 @@ const VideoCarousel = () => {
   useEffect(() => {
     if (loadedData.length > 3) {
       if (!isPlaying) {
-        videoRef.current[videoId].pause();
+        videoRef.current[videoId]?.pause();
       } else {
-        startPlay && videoRef.current[videoId].play();
+        startPlay && videoRef.current[videoId]?.play();
       }
     }
   }, [startPlay, videoId, isPlaying, loadedData]);
 
-  // vd id is the id for every video until id becomes number 3
+  // video id is the id for every video until id becomes number 3
   const handleProcess = (type, i) => {
     switch (type) {
       case "video-end":
