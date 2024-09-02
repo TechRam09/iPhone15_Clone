@@ -1,6 +1,33 @@
+import React from "react";
 import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 
-createRoot(document.getElementById("root")).render(<App />);
+//...
+import * as Sentry from "@sentry/react";
+
+Sentry.init({
+  dsn:
+    "https://7092c9094869171dbc751fd147cc2385@o4507885089390592.ingest.us.sentry.io/4507885103480832",
+  integrations: [
+    Sentry.browserTracingIntegration(),
+    Sentry.reactRouterV6BrowserTracingIntegration({
+      useEffect: React.useEffect,
+    }),
+    Sentry.replayIntegration({
+      maskAllText: false,
+      blockAllMedia: false,
+    }),
+  ],
+  tracesSampleRate: 1.0,
+  tracePropagationTargets: ["localhost", /^https:\/\/yourserver\.io\/api/],
+  replaysSessionSampleRate: 0.1,
+  replaysOnErrorSampleRate: 1.0,
+});
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
