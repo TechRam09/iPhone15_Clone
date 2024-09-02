@@ -9,6 +9,7 @@ import Lights from "./Lights";
 import IPhone from "./IPhone";
 import { Suspense } from "react";
 import * as THREE from "three";
+import Loader from "./Loader";
 
 const ModelView = ({
   index,
@@ -32,6 +33,7 @@ const ModelView = ({
 
       <Lights />
       <OrbitControls
+        makeDefault
         ref={controlRef}
         enablePan={false}
         enableZoom={false}
@@ -44,7 +46,7 @@ const ModelView = ({
         name={`${index === 1} ? 'small':'large'`}
         position={[0, 0, 0]}
       >
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loader />}>
           <IPhone
             scale={index === 1 ? [15, 15, 15] : [17, 17, 17]}
             item={item}
