@@ -8,6 +8,7 @@ import {
 import Lights from "./Lights";
 import IPhone from "./IPhone";
 import { Suspense } from "react";
+import * as THREE from "three";
 
 const ModelView = ({
   index,
@@ -30,13 +31,27 @@ const ModelView = ({
       <PerspectiveCamera makeDefault position={[0, 0, 4]} />
 
       <Lights />
-      <Suspense fallback={<div>Loading...</div>}>
-        <IPhone
-          scale={index === 1 ? [15, 15, 15] : [17, 17, 17]}
-          item={item}
-          size={size}
-        />
-      </Suspense>
+      <OrbitControls
+        ref={controlRef}
+        enablePan={false}
+        enableZoom={false}
+        rotateSpeed={0.4}
+        target={new THREE.Vector3(0, 0, 0)}
+        onEnd={() => setRotationState(controlRef.current.getAzimuthalAngle())}
+      />
+      <group
+        ref={groupRef}
+        name={`${index === 1} ? 'small':'large'`}
+        position={[0, 0, 0]}
+      >
+        <Suspense fallback={<div>Loading...</div>}>
+          <IPhone
+            scale={index === 1 ? [15, 15, 15] : [17, 17, 17]}
+            item={item}
+            size={size}
+          />
+        </Suspense>
+      </group>
     </View>
   );
 };
