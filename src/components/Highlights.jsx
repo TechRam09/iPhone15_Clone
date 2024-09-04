@@ -1,13 +1,24 @@
 import { useGSAP } from "@gsap/react";
 import React from "react";
-import gsap from "gsap";
 import { rightImg, watchImg } from "../utils";
 import VideoCarousel from "./VideoCarousel";
+import { animateWithGsap } from "../utils/animations";
 
 const Highlights = () => {
   useGSAP(() => {
-    gsap.to("#title", { opacity: 1, y: 0 });
-    gsap.to(".link", { opacity: 1, y: 0, duration: 1, stagger: 0.25 });
+    animateWithGsap("#title", {
+      opacity: 1,
+      y: 0,
+      ease: "power2.inOut",
+      duration: 1,
+    });
+    animateWithGsap(".link", {
+      opacity: 1,
+      y: 0,
+      ease: "power2.inOut",
+      duration: 1,
+      stagger: 0.25,
+    });
   }, []);
   return (
     <section
@@ -20,11 +31,11 @@ const Highlights = () => {
             Get the highlights.
           </h1>
           <div className=" flex flex-wrap items-end gap-5">
-            <p className="link sm:text-sm">
+            <p className="link sm:text-sm md:text-lg">
               Watch the Film
               <img src={watchImg} alt="watch" className=" ml-2" />
             </p>
-            <p className="link ">
+            <p className="link sm:text-sm md:text-lg">
               Watch the Event
               <img src={rightImg} alt="right" className=" ml-2" />
             </p>
