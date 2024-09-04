@@ -53,7 +53,7 @@ const Features = () => {
             Explore The Full Story.
           </h1>
         </div>
-        <div className="flex flex-col justify-center items-center overflow-hidden">
+        <div className="flex flex-col justify-center  overflow-hidden">
           <div className="mt-24 md:mt-32 mb-24 px-16 md:px-0 md:pl-24">
             <h2 className="text-5xl lg:text-7xl font-semibold">iPhone.</h2>
             <h2 className="text-5xl lg:text-7xl font-semibold">
