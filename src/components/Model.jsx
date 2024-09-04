@@ -9,6 +9,7 @@ import { Canvas } from "@react-three/fiber";
 import { View } from "@react-three/drei";
 import { models, sizes } from "../constants";
 import { animateWithGsapTimeline } from "../utils/animations";
+import { animateWithGsap } from "../utils/animations";
 
 const Model = () => {
   const [size, setSize] = useState("small");
@@ -48,7 +49,12 @@ const Model = () => {
   }, [size]);
 
   useGSAP(() => {
-    gsap.to("#heading", { y: 0, opacity: 1 });
+    animateWithGsap("#heading", {
+      opacity: 1,
+      y: 0,
+      ease: "power2.inOut",
+      duration: 1,
+    });
   }, []);
 
   return (
