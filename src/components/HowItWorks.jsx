@@ -9,11 +9,12 @@ const HowItWorks = () => {
     gsap.from("#chip", {
       scrollTrigger: {
         trigger: "#chip",
+        toggleActions: "play pause play restart",
         start: "20% bottom",
       },
       opacity: 0,
       scale: 2,
-      duration: 2,
+      duration: 1.5,
       ease: "power2.in",
     });
     animateWithGsap(".g_fadeIn", {
@@ -26,7 +27,7 @@ const HowItWorks = () => {
     gsap.to("#frameVideo", {
       scrollTrigger: {
         trigger: "#frameVideo",
-        toggleActions: "play pause reverse restart",
+        toggleActions: "play pause restart restart",
         start: "-10% bottom",
       },
 
@@ -74,7 +75,7 @@ const HowItWorks = () => {
           <p className="text-gray font-semibold text-center mt-3">
             Honkai: Star Rail
           </p>
-          <div className="hiw-text-container mt-14 md:px-36">
+          <div className="hiw-text-container mt-14 lg:px-36">
             <div className="flex flex-1 justify-center flex-col">
               <p className="hiw-text g_fadeIn">
                 A17 Pro is an entirely new class of iPhone chip that delivers
