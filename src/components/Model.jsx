@@ -58,7 +58,7 @@ const Model = () => {
   }, []);
 
   return (
-    <section className="common-padding">
+    <section className="common-padding overflow-hidden">
       <div className="screen-max-width">
         <h1 id="heading" className="section-heading">
           Take a closer look.
